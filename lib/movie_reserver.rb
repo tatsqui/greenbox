@@ -25,11 +25,11 @@ module GreenBox
       matching_movies = movies.select { |movie| movie.title == movie_title }
 
       matching_movies.each do |movie|
-        movie_reservations = rentals.select do |rental|
+        movie_rentals = rentals.select do |rental|
           rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
         end
 
-        if movie_reservations.empty?
+        if movie_rentals.empty?
           rental = GreenBox::Rental.new(movie, date_range, customer)
           rentals << rental
           return rental

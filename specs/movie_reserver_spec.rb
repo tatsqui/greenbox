@@ -112,5 +112,11 @@ describe GreenBox::MovieReserver do
         reserver.rent_movie('Casablanca', date_range, 'Ada Lovelace')
       }.must_raise StandardError
     end
+
+    it 'raises an error if a movie is requested that does not appear in the list' do
+      expect do
+        reserver.rent_movie('Ready Player One', date_range, 'Ada Lovelace')
+      end.must_raise StandardError
+    end
   end
 end
