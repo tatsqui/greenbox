@@ -11,6 +11,33 @@ module GreenBox
       @rentals = []
     end
 
+    def available_movies(date_range)
+      movies_available = movies.select do |movie|
+        movie_rentals = rentals.select do |rental|
+          rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
+        end
+        movie_rentals.empty?
+      end
+      return movies_available
+    end
+
+    def reserve_movie(movie_title, date_range, customer)
+      matching_movies = movies.select { |movie| movie.title == movie_title }
+
+      matching_movies.each do |movie|
+        movie_reservations = rentals.select do |rental|
+          rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
+        end
+
+        if movie_reservations.empty?
+          rental = GreenBox::Rental.new(movie, date_range, customer)
+          rentals << rental
+          return rental
+        end
+      end
+      return nil
+    end
+
     def self.load_movies
       movies = []
 
