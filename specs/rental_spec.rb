@@ -14,6 +14,13 @@ describe GreenBox::Rental do
     it 'can be instantiated' do
       expect(rental).must_be_instance_of GreenBox::Rental
     end
+
+    it 'raises an ArgumentError for illegal Date range' do
+      date_range = GreenBox::DateRange.new(Time.parse('2018-08-09'), Time.parse('2018-08-09'))
+      expect do
+        GreenBox::Rental.new(movie, date_range, 'Ada Lovelace')
+      end.must_raise ArgumentError
+    end
   end
 
   describe 'cost' do
