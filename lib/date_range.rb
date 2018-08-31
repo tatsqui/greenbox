@@ -21,7 +21,7 @@ module GreenBox
     end
 
     def nights
-      return end_date - start_date
+      return ((end_date - start_date) / 24 / 60 / 60).to_i
     end
   end
 end
