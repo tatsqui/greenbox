@@ -21,7 +21,7 @@ module GreenBox
       return movies_available
     end
 
-    def reserve_movie(movie_title, date_range, customer)
+    def rent_movie(movie_title, date_range, customer)
       matching_movies = movies.select { |movie| movie.title == movie_title }
 
       matching_movies.each do |movie|
@@ -35,7 +35,7 @@ module GreenBox
           return rental
         end
       end
-      return nil
+      raise StandardError, 'Movie not available'
     end
 
     def self.load_movies
