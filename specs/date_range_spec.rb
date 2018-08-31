@@ -54,8 +54,8 @@ describe GreenBox::DateRange do
 
   describe 'contains' do
     let (:date_range) do
-      date_range = GreenBox::DateRange.new(Time.parse('2018-08-01'),
-                                           Time.parse('2018-08-05'))
+      GreenBox::DateRange.new(Time.parse('2018-08-01'),
+                              Time.parse('2018-08-05'))
     end
 
     it 'returns true, if the DateRange contains the date' do
@@ -71,12 +71,12 @@ describe GreenBox::DateRange do
 
   describe 'nights' do
     let (:date_range) do
-      date_range = GreenBox::DateRange.new(Time.parse('2018-08-01'),
-                                           Time.parse('2018-08-05'))
+      GreenBox::DateRange.new(Time.parse('2018-08-01'),
+                              Time.parse('2018-08-05'))
     end
 
     it 'returns an accurate count' do
-      expect(date_range.nights).must_be_close_to 4.0, 0.01
+      expect(date_range.nights).must_equal 4
     end
 
   end
