@@ -1,5 +1,7 @@
 require_relative 'spec_helper'
 
+MOVIES_IN_CSV = 11
+
 describe GreenBox::MovieReserver do
 
   describe 'initialization' do
@@ -12,7 +14,7 @@ describe GreenBox::MovieReserver do
     end
 
     it 'has the proper number of movies' do
-      expect(@reserver.movies.length).must_equal 10
+      expect(@reserver.movies.length).must_equal MOVIES_IN_CSV
     end
   end
 
@@ -20,7 +22,7 @@ describe GreenBox::MovieReserver do
     let (:movie_list) { GreenBox::MovieReserver.load_movies }
 
     it 'loads the right number of movies' do
-      expect(movie_list.length).must_equal 10
+      expect(movie_list.length).must_equal MOVIES_IN_CSV
     end
 
     it 'loads the 1st movie' do
@@ -32,11 +34,11 @@ describe GreenBox::MovieReserver do
     end
 
     it 'loads the last movie' do
-      first_movie = movie_list.last
+      last_movie = movie_list.last
 
-      expect(first_movie.title).must_equal 'E.T. The Extra-Terrestrial'
-      expect(first_movie.id).must_equal 10
-      expect(first_movie.publisher).must_equal 'Universal'
+      expect(last_movie.title).must_equal 'Crazy Rich Asians'
+      expect(last_movie.id).must_equal 11
+      expect(last_movie.publisher).must_equal 'Warner Bros'
     end
 
     it 'loads the right actors' do
@@ -46,7 +48,7 @@ describe GreenBox::MovieReserver do
 
       last_movie = movie_list.last
 
-      expect(last_movie.actors).must_include 'Dee Wallace'
+      expect(last_movie.actors).must_include 'Constance Wu'
     end
   end
 end
