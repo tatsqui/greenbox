@@ -51,4 +51,30 @@ describe GreenBox::MovieReserver do
       expect(last_movie.actors).must_include 'Constance Wu'
     end
   end
+
+  describe 'movies available' do
+    let (:reserver) { GreenBox::MovieReserver.new }
+
+    it 'will list the available movies' do
+      date_range = GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09'))
+      available_movies = reserver.available_movies(date_range)
+
+      expect(available_movies.length).must_equal 11
+    end
+
+    it 'will not include rented movies' do
+      date_range = GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09'))
+      reserver.reserve_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
+
+      available_movies = reserver.available_movies(date_range)
+      expect(available_movies.length).must_equal 10
+
+      movie_id = 2
+      movie_id_2 = available_movies.find do |movie|
+        movie.id == movie_id
+      end
+
+      expect(movie_id_2).must_be_nil
+    end
+  end
 end
