@@ -3,18 +3,17 @@ require_relative 'spec_helper'
 MOVIES_IN_CSV = 11
 
 describe GreenBox::MovieReserver do
+  let (:reserver) { GreenBox::MovieReserver.new }
+  let (:date_range) { GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09')) }
 
   describe 'initialization' do
-    before do
-      @reserver = GreenBox::MovieReserver.new
-    end
 
     it 'can be instantiated' do
-      expect(@reserver).must_be_instance_of GreenBox::MovieReserver
+      expect(reserver).must_be_instance_of GreenBox::MovieReserver
     end
 
     it 'has the proper number of movies' do
-      expect(@reserver.movies.length).must_equal MOVIES_IN_CSV
+      expect(reserver.movies.length).must_equal MOVIES_IN_CSV
     end
   end
 
@@ -53,10 +52,8 @@ describe GreenBox::MovieReserver do
   end
 
   describe 'movies available' do
-    let (:reserver) { GreenBox::MovieReserver.new }
 
     it 'will list the available movies' do
-      date_range = GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09'))
       available_movies = reserver.available_movies(date_range)
 
       expect(available_movies.length).must_equal 11
@@ -64,7 +61,7 @@ describe GreenBox::MovieReserver do
 
     it 'will not include rented movies' do
       date_range = GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09'))
-      reserver.reserve_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
+      reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
 
       available_movies = reserver.available_movies(date_range)
       expect(available_movies.length).must_equal 10
@@ -75,6 +72,45 @@ describe GreenBox::MovieReserver do
       end
 
       expect(movie_id_2).must_be_nil
+    end
+  end
+
+  describe 'rent_movie' do
+    it 'returns a rental for a successfully rented movie' do
+
+      rental = reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
+
+      expect(rental).wont_be_nil
+      expect(rental.movie).wont_be_nil
+      expect(rental.movie.title).must_equal 'Crazy Rich Asians'
+      expect(rental.date_range).must_equal date_range
+    end
+
+    it 'can rent multiple movies with the same title' do
+      rentals = [reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')]
+
+      expect(rentals.first).wont_be_nil
+      expect(rentals.first.movie).wont_be_nil
+      expect(rentals.first.movie.title).must_equal 'Crazy Rich Asians'
+      expect(rentals.first.date_range).must_equal date_range
+
+      rentals << [reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')]
+
+      expect(rentals.length).must_equal 2
+      expect(rentals.first.movie).wont_be_nil
+      expect(rentals.first.movie.title).must_equal 'Crazy Rich Asians'
+      expect(rentals.first.date_range).must_equal date_range
+    end
+
+    it 'cannot rent a movie already rented' do
+      rental = reserver.rent_movie('Casablanca', date_range, 'Ada Lovelace')
+
+      expect(rental).wont_be_nil
+      expect(rental.movie.title).must_equal 'Casablanca'
+
+      expect {
+        reserver.rent_movie('Casablanca', date_range, 'Ada Lovelace')
+      }.must_raise StandardError
     end
   end
 end
