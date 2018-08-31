@@ -22,5 +22,11 @@ describe GreenBox::Rental do
 
       expect(rental.cost).must_be_close_to 3 * 2, 0.01
     end
+    it 'calculates the cost for a 1-day rental' do
+      new_date_range = GreenBox::DateRange.new(Time.parse('2018-08-09'), Time.parse('2018-08-10'))
+      rental = GreenBox::Rental.new(movie, new_date_range, 'Ada Lovelace')
+
+      expect(rental.cost).must_be_close_to 3 * 1, 0.01
+    end
   end
 end
