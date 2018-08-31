@@ -10,7 +10,7 @@ module GreenBox
     end
 
     def stars_actor(actor_name)
-      return !actors.find { |actor| actor.casecmp(actor_name.upcase) }.nil?
+      return !actors.find { |actor| actor.casecmp(actor_name) == 0 }.nil?
     end
   end
 end
