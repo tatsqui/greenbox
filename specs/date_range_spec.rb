@@ -50,6 +50,22 @@ describe GreenBox::DateRange do
       expect(date_1.overlaps(date_2)).must_equal false
       expect(date_2.overlaps(date_1)).must_equal false
     end
+  end
 
+  describe 'contains' do
+    let (:date_range) do
+      date_range = GreenBox::DateRange.new(Time.parse('2018-08-01'),
+                                           Time.parse('2018-08-05'))
+    end
+
+    it 'returns true, if the DateRange contains the date' do
+      expect(date_range.contains(Time.parse('2018-08-01'))).must_equal true
+      expect(date_range.contains(Time.parse('2018-08-04'))).must_equal true
+    end
+
+    it 'returns false, if the DateRange does not contain the date' do
+      expect(date_range.contains(Time.parse('2018-07-31'))).must_equal false
+      expect(date_range.contains(Time.parse('2018-08-05'))).must_equal false
+    end
   end
 end
