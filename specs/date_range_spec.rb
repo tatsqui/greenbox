@@ -68,4 +68,16 @@ describe GreenBox::DateRange do
       expect(date_range.contains(Time.parse('2018-08-05'))).must_equal false
     end
   end
+
+  describe 'nights' do
+    let (:date_range) do
+      date_range = GreenBox::DateRange.new(Time.parse('2018-08-01'),
+                                           Time.parse('2018-08-05'))
+    end
+
+    it 'returns an accurate count' do
+      expect(date_range.nights).must_be_close_to 4.0, 0.01
+    end
+
+  end
 end
