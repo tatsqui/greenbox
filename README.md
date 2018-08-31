@@ -13,7 +13,7 @@ This is a stage 2, individual project.
 
 ## Introduction
 
-Your instructors have decided it would be a **brilliant** idea to start a company renting physical movie disks.  This system will operate with an electronic kiosk and a website.  Another developer is building the kiosk UI and website, and you have been assigned the task to build a system to track movies and rentals.  A user will find and reserve movies for a period of days and then stop by the nearest kiosk to pick up the movie.  **Your job is to implement the business logic only.** You do not need to build a CLI for this project.
+Your instructors have decided it would be a **brilliant** idea to start a company called **GreenBox** renting physical movie disks.  This system will operate with an electronic kiosk and a website.  A user will find and reserve movies for a period of days and then stop by the nearest kiosk to pick up the movie.  Another developer is building the kiosk UI and website, and you have been assigned the task to build a system to track movies and rentals.  **Your job is to implement the business logic only.** You do not need to build a CLI for this project.
 
 Most of the tests to verify your implementation have been written.  You will use these tests to verify your implementation.
 
@@ -113,4 +113,4 @@ The `RentalManager` will be able to perform the following actions (methods):
 ## Optional Enhancements
 
 You can add the following methods along with tests to further enhance this project:
--  movies_staring(actor_name, date_range):  This method will list all movies available in the given date range and with the provied actor.  
+-  movies_staring(actor_name, date_range):  This method will list all movies available in the given date range and with the provied actor.
