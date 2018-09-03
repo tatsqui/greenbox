@@ -10,6 +10,3 @@ Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
 
 # Require_relative your lib files here!
 require_relative '../lib/date_range'
-require_relative '../lib/movie'
-require_relative '../lib/movie_reserver'
-require_relative '../lib/rental'

@@ -75,48 +75,28 @@ describe GreenBox::MovieReserver do
     end
   end
 
-  describe 'rent_movie' do
+  xdescribe 'rent_movie' do
     it 'returns a rental for a successfully rented movie' do
+      # TODO Your Code goes here
 
-      rental = reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
 
-      expect(rental).wont_be_nil
-      expect(rental.movie).wont_be_nil
-      expect(rental.movie.title).must_equal 'Crazy Rich Asians'
-      expect(rental.date_range).must_equal date_range
     end
 
     it 'can rent multiple movies with the same title' do
-      rentals = [reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')]
+      # TODO Your Code goes here
 
-      expect(rentals.first).wont_be_nil
-      expect(rentals.first.movie).wont_be_nil
-      expect(rentals.first.movie.title).must_equal 'Crazy Rich Asians'
-      expect(rentals.first.date_range).must_equal date_range
 
-      rentals << [reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')]
-
-      expect(rentals.length).must_equal 2
-      expect(rentals.first.movie).wont_be_nil
-      expect(rentals.first.movie.title).must_equal 'Crazy Rich Asians'
-      expect(rentals.first.date_range).must_equal date_range
     end
 
-    it 'cannot rent a movie already rented' do
-      rental = reserver.rent_movie('Casablanca', date_range, 'Ada Lovelace')
+    xit 'cannot rent a movie already rented' do
+      # TODO Your Code goes here
 
-      expect(rental).wont_be_nil
-      expect(rental.movie.title).must_equal 'Casablanca'
 
-      expect {
-        reserver.rent_movie('Casablanca', date_range, 'Ada Lovelace')
-      }.must_raise StandardError
     end
 
-    it 'raises an error if a movie is requested that does not appear in the list' do
-      expect do
-        reserver.rent_movie('Ready Player One', date_range, 'Ada Lovelace')
-      end.must_raise StandardError
+    xit 'raises an error if a movie is requested that does not appear in the list' do
+      # TODO Your Code goes here
+
     end
   end
 end

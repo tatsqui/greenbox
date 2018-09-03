@@ -75,8 +75,8 @@ A `DateRange` will have the following attributes:
 
 The `DateRange` will have the following methods:
 
-*   overlaps(other_date_range) - This method takes another date range as a parameter and returns `true` if the date ranges overlap.  **Note** you will need to do a little research or work to determine how to identify overlapping date ranges.
 *   contains(date) - This method returns true if the date occurs on or after the start date and before the end date.
+*   overlaps(other_date_range) - This method takes another date range as a parameter and returns `true` if the date ranges overlap.  **Note** you will need to do a little research or work to determine how to identify overlapping date ranges.
 *   nights - This method will return the number of nights included in the given `DateRange
 
 ### Rental
