@@ -108,7 +108,7 @@ The `RentalManager` will be able to perform the following actions (methods):
     -   The `initialize` method should use `self.load_movies` to read in the movie list for the application
 *   `available_movies(date_range)`:  This method will take a `DateRange` instance and return a list of movies available (not rented yet) in that range.
 *   `rent_movie(movie_title, date_range, customer_name)`:  This method will attempt to reserve a movie with the given title for the given date range.  If the movie is not available in that range the method should raise a `StandardError`.
-  - Note:  This method's tests are not completely written.  You will need to fill-in the provided `it` blocks
+    -   Note:  This method's tests are not completely written.  You will need to fill-in the provided `it` blocks
 
 
 ## Optional Enhancements
