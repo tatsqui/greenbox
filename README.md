@@ -39,12 +39,13 @@ We will use the same project structure we used for the previous project. Classes
 ## Process
 You should use the following process as much as possible:
 
-Write examine tests
-Write pseudocode
-Write code
-Run tests
-Fix code until the tests pass
-Commit
+1.  Write examine tests
+1.  Write pseudocode
+1.  Write code
+1.  Run tests
+1.  Fix code until the tests pass
+1.  Commit
+
 You should have 95% code coverage using simplecov.
 
 Your git commit history should provide a clear description of how your code developed, letting the reader know what changed when and why.  **Make meaningful commit messages**
