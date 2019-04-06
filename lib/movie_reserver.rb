@@ -1,6 +1,7 @@
 require 'csv'
 
 module GreenBox
+  class GreenBoxReservationError < StandardError; end
   class MovieReserver
     attr_reader :available_movies, :rent_movies, :movies, :rentals
 
@@ -11,23 +12,43 @@ module GreenBox
 
     #function to relay what movies are available for specific date range
     def available_movies(date_range)
-      # loop through movies array and select a rental whose movie id matches a 
-      # movie id in list of movies. id is important because there is a duplicate.
-      # rentals do not have movie id's, but need to be linked somehow
-      # need to remove a single duplicate movie from list of available movies
-      
+      all_movies = @movies
+      # returns only movies that are not booked on given date range
+      # deletes movie from list of movies if it is booked
+      # specific to id
+      rentals.each do |rental|
+        all_movies.delete_if do |movie|
+          rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
+          end
+        end
+       
+      return all_movies
     end
 
     #function to rent a movie or raise an error that movie is not available/found for specific date range
     def rent_movie(movie_title, date_range, customer_name)
       #finds matching movie objects for a given title
-      movie_rented = movies.each { |movie| movie.title == movie_title }
+      movie_request = movies.select { |movie| movie.title == movie_title }
+      if movie_request.empty?
+        raise GreenBoxReservationError, "Movie does not exist in our database."
 
-      # for each movie that is already rented, see if it is available for given date range
+      # for the movie requested, 
+      # searches for movie conflicts by date, will not double book a movie
+      movie_request.each do |movie|
+       movie_rental = @rentals.select do |rental|
+          rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
+       end
+       if movie_rental.empty?
+        mov_rental = GreenBox::Rental.new(movie, date_range, customer_name)
+        rentals << mov_rental
+        return mov_rental
+       end
+      end
+      raise StandardError, "Movie: #{movie_title} not available for given dates: #{date_range}"
+
+    end
 
     private
-
-
 
     def self.load_movies
       all_movies = CSV.read("data/movies.csv", headers: false).map do |line|

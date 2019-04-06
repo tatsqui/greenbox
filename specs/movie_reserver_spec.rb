@@ -75,7 +75,7 @@ describe "GreenBox::MovieReserver" do
     end
   end
 
-  xdescribe "rent_movie" do
+  describe "rent_movie" do
     let(:new_reserver) { GreenBox::MovieReserver.new}
 
     it "returns a rental for a successfully rented movie" do
@@ -91,17 +91,33 @@ describe "GreenBox::MovieReserver" do
     end
 
     it "can rent multiple movies with the same title" do
-      new_reserver.rent_movie()
+      date_range1 = GreenBox::DateRange.new(Time.parse("2018-08-04"), Time.parse("2018-08-05"))
+      date_range2 = GreenBox::DateRange.new(Time.parse("2018-08-10"), Time.parse("2018-08-11"))
+      date_range3 = GreenBox::DateRange.new(Time.parse("2018-08-11"), Time.parse("2018-08-12"))
+      movie_name1 = "Crazy Rich Asians"
+      movie_name2 = "The Wizard of Oz"
+      movie_name3 = "Mad Max: Fury Road"
+      customer = "Tatiana"
+      first_rental = new_reserver.rent_movie(movie_name1, date_range1, customer)
+      second_rental = new_reserver.rent_movie(movie_name2, date_range2, customer)
+      third_rental = new_reserver.rent_movie(movie_name3, date_range3, customer)
+      three_rentals = [first_rental, second_rental, third_rental]
+
+      expect(new_reserver.rentals.length).must_equal three_rentals.length
 
     end
 
-    xit "cannot rent a movie already rented" do
-      # TODO Your Code goes here
+    it "cannot rent a movie already rented" do
+      date_range = GreenBox::DateRange.new(Time.parse("2018-08-10"), Time.parse("2018-08-11"))
+      new_reserver.rent_movie("The Wizard of Oz", date_range, "Tatiana")
+
+      expect {
+        new_reserver.rent_movie("The Wizard of Oz", date_range, "Erica")
+      }.must_raise StandardError
 
     end
 
-    xit "raises an error if a movie is requested that does not appear in the list" do
-      # TODO Your Code goes here
+    it "raises an error if a movie is requested that does not appear in the list" do
 
     end
   end
