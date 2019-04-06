@@ -9,5 +9,9 @@ module GreenBox
       @actors = actors ||= []
     end
 
+    def stars_actor(actor_name)
+      return @actors.include?(actor_name)
+    end
+
   end
 end
