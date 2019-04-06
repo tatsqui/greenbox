@@ -2,22 +2,22 @@ require_relative 'spec_helper'
 
 MOVIES_IN_CSV = 11
 
-xdescribe 'GreenBox::MovieReserver' do
+describe 'GreenBox::MovieReserver' do
   let (:reserver) { GreenBox::MovieReserver.new }
   let (:date_range) { GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09')) }
 
   describe 'initialization' do
 
-    xit 'can be instantiated' do
+    it 'can be instantiated' do
       expect(reserver).must_be_instance_of GreenBox::MovieReserver
     end
 
-    xit 'has the proper number of movies' do
+    it 'has the proper number of movies' do
       expect(reserver.movies.length).must_equal MOVIES_IN_CSV
     end
   end
 
-  describe 'load_movies' do
+  xdescribe 'load_movies' do
     let (:movie_list) { GreenBox::MovieReserver.load_movies }
 
     xit 'loads the right number of movies' do

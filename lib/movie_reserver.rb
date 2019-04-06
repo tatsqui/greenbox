@@ -4,10 +4,10 @@ require_relative "rental"
 
 module GreenBox
   class MovieReserver
-    attr_reader
+    attr_reader :load_movies, :movies
 
-    def initialize movies, rentals
-      @movies = movies.load_movies
+    def initialize 
+      @movies = MovieReserver.load_movies
       @rentals = []
     end
 
@@ -16,9 +16,10 @@ module GreenBox
     private
 
     def self.load_movies
-        return CSV.read("data/movies.csv", headers: false).map do |line|
-          self.new(line[0].to_i, line[1], line[2], line[3].split(":")
-        end
+      all_movies = CSV.read("data/movies.csv", headers: false).map do |line|
+        Movie.new(line[0].to_i, line[1], line[2], actors: line[3].split(":"))
+      end
+      return all_movies
     end
   end
 end
