@@ -2,7 +2,6 @@ require 'time'
 
 module GreenBox
   class DateRange
-    class DateRangeError < StandardError; end
     attr_reader :start_date, :end_date, :nights
 
     def initialize(start_date, end_date)
