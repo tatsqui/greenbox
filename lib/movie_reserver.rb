@@ -31,6 +31,8 @@ module GreenBox
     def rent_movie(movie_title, date_range, customer_name)
       #finds matching movie objects for a given title
       movie_request = movies.select { |movie| movie.title == movie_title }
+
+      # raises error when title not found in movies list
       if movie_request.empty?
         raise GreenBoxReservationError.new("Movie does not exist in our database.")
       end
@@ -41,6 +43,7 @@ module GreenBox
        movie_rental = @rentals.select do |rental|
           rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
        end
+       
        if movie_rental.empty?
         mov_rental = GreenBox::Rental.new(movie, date_range, customer_name)
         rentals << mov_rental
