@@ -3,6 +3,8 @@ require 'csv'
 module GreenBox
   class GreenBoxReservationError < StandardError; end
   class MovieReserver
+  
+
     attr_reader :available_movies, :rent_movies, :movies, :rentals
 
     def initialize 
@@ -30,7 +32,8 @@ module GreenBox
       #finds matching movie objects for a given title
       movie_request = movies.select { |movie| movie.title == movie_title }
       if movie_request.empty?
-        raise GreenBoxReservationError, "Movie does not exist in our database."
+        raise GreenBoxReservationError.new("Movie does not exist in our database.")
+      end
 
       # for the movie requested, 
       # searches for movie conflicts by date, will not double book a movie
@@ -44,7 +47,7 @@ module GreenBox
         return mov_rental
        end
       end
-      raise StandardError, "Movie: #{movie_title} not available for given dates: #{date_range}"
+      raise GreenBoxReservationError.new("Movie: #{movie_title} not available for given dates: #{date_range}")
 
     end
 

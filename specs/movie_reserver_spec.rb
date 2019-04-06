@@ -113,12 +113,16 @@ describe "GreenBox::MovieReserver" do
 
       expect {
         new_reserver.rent_movie("The Wizard of Oz", date_range, "Erica")
-      }.must_raise StandardError
+      }.must_raise GreenBox::GreenBoxReservationError
 
     end
 
     it "raises an error if a movie is requested that does not appear in the list" do
-
+      date_range = GreenBox::DateRange.new(Time.parse("2018-08-10"), Time.parse("2018-08-11"))
+      
+      expect {
+        new_reserver.rent_movie("Mario Kingdom",date_range, "Steve" )
+      }.must_raise GreenBox::GreenBoxReservationError
     end
   end
 end
