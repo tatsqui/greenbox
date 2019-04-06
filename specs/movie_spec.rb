@@ -39,11 +39,11 @@ describe 'GreenBox::Movie' do
       expect(movie.stars_actor('Ryan Reynolds')).must_equal true
     end
 
-    it 'returns false if the movie does feature the actor' do
+    it 'returns false if the movie does not feature the actor' do
       expect(movie.stars_actor('Ryan Seacrest')).must_equal false
     end
 
-    it 'returns false if the movie does feature any actors' do
+    it 'returns false if the movie does not feature any actors' do
       movie = GreenBox::Movie.new(3, 'Green Lantern', 'Fox')
       expect(movie.stars_actor('Ryan Reynolds')).must_equal false
     end
