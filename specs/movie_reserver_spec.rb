@@ -125,4 +125,24 @@ describe "GreenBox::MovieReserver" do
       }.must_raise GreenBox::GreenBoxReservationError
     end
   end
+
+  describe "movies starring" do 
+    let(:reserver_stars) {GreenBox::MovieReserver.new}
+    star_name = "Ryan Reynolds"
+    date_range = GreenBox::DateRange.new(Time.parse("2018-08-10"), Time.parse("2018-08-11"))
+    # no movies reserved at this time so there should be only one result
+      
+    it "returns all movies for a given date range starring that actor" do 
+      correct_answer = reserver_stars.movies.first
+      starring_in = reserver_stars.movies_starring(star_name, date_range)
+      
+      expect(starring_in).must_equal correct_answer
+
+    end
+
+    it "returns nil for for a given date range for movies that do not have that actor" do
+    end
+
+  end
+
 end

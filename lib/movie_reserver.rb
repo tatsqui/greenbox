@@ -43,7 +43,7 @@ module GreenBox
        movie_rental = @rentals.select do |rental|
           rental.movie.id == movie.id && rental.date_range.overlaps(date_range)
        end
-       
+
        if movie_rental.empty?
         mov_rental = GreenBox::Rental.new(movie, date_range, customer_name)
         rentals << mov_rental
@@ -53,6 +53,11 @@ module GreenBox
       raise GreenBoxReservationError.new("Movie: #{movie_title} not available for given dates: #{date_range}")
 
     end
+
+    def movies_starring(actor, date_range)
+      return movies.first
+    end
+
 
     private
 
@@ -66,5 +71,6 @@ module GreenBox
 
       return all_movies
     end
+
   end
 end
