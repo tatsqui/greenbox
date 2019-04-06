@@ -133,14 +133,30 @@ describe "GreenBox::MovieReserver" do
     # no movies reserved at this time so there should be only one result
       
     it "returns all movies for a given date range starring that actor" do 
-      correct_answer = reserver_stars.movies.first
+      correct_answer = [reserver_stars.movies[0]]
       starring_in = reserver_stars.movies_starring(star_name, date_range)
       
       expect(starring_in).must_equal correct_answer
 
     end
 
+    it "if actor stars in more than one movie, returns multiple options" do 
+      # these tests are no good if index of movies change for movie list
+      # only written for scope of this assignment
+      second_star_name = "Daniel Kaluuya"
+      second_correct_answer = [reserver_stars.movies[2], reserver_stars.movies[7]]
+      starring_in = reserver_stars.movies_starring(second_star_name, date_range)
+
+      expect(starring_in).must_equal second_correct_answer
+    end
+
     it "returns nil for for a given date range for movies that do not have that actor" do
+      rent_movie = reserver_stars.rent_movie("The Wizard of Oz", date_range, "Tatiana")
+      third_star = "Frank Morgan"
+      starring_in = reserver_stars.movies_starring(third_star, date_range)
+      
+      expect(starring_in).must_equal []
+      expect
     end
 
   end
