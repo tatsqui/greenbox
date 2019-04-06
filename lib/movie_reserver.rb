@@ -55,7 +55,12 @@ module GreenBox
     end
 
     def movies_starring(actor, date_range)
-      return movies.first
+      rentable = available_movies(date_range)
+
+      stars_in = rentable.find do |movie|
+        movie.actors.include?(actor)
+      end
+      return stars_in
     end
 
 
