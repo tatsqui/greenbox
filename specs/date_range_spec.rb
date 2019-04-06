@@ -2,7 +2,7 @@ require 'time'
 require_relative 'spec_helper'
 
 
-xdescribe 'GreenBox::DateRange' do
+describe 'GreenBox::DateRange' do
 
   describe 'initialization' do
     it 'can be created' do
