@@ -151,7 +151,8 @@ describe "GreenBox::MovieReserver" do
     end
 
     it "returns nil for for a given date range for movies that do not have that actor" do
-      rent_movie = reserver_stars.rent_movie("The Wizard of Oz", date_range, "Tatiana")
+      # this actor only appears in this movie, so should return an empty array for this date range
+      rented_movie = reserver_stars.rent_movie("The Wizard of Oz", date_range, "Tatiana")
       third_star = "Frank Morgan"
       starring_in = reserver_stars.movies_starring(third_star, date_range)
       
