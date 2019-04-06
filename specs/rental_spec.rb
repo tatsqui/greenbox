@@ -23,7 +23,7 @@ describe 'GreenBox::Rental' do
     end
   end
 
-  xdescribe 'cost' do
+  describe 'cost' do
     it 'calculates the cost for a rental' do
       rental = GreenBox::Rental.new(movie, date_range, 'Ada Lovelace')
 
