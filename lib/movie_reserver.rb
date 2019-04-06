@@ -4,14 +4,20 @@ require_relative "rental"
 
 module GreenBox
   class MovieReserver
-    attr_reader :load_movies, :movies
+    attr_reader :available_movies, :rent_movies, :movies
 
     def initialize 
       @movies = MovieReserver.load_movies
       @rentals = []
     end
 
+    def available_movies(date_range)
+      raise NotImplementedError
+    end
 
+    def rent_movies(movie_title, date_range, customer_name)
+      raise NotImplementedError
+    end
 
     private
 
