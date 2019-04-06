@@ -12,11 +12,11 @@ module GreenBox
     end
 
     def available_movies(date_range)
-      raise NotImplementedError
+      
     end
 
     def rent_movies(movie_title, date_range, customer_name)
-      raise NotImplementedError
+      
     end
 
     private
