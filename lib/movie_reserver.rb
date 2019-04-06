@@ -1,7 +1,4 @@
 require 'csv'
-require_relative "movie"
-require_relative "rental"
-require_relative "date_range"
 
 module GreenBox
   class MovieReserver
@@ -16,18 +13,16 @@ module GreenBox
     def available_movies(date_range)
       # loop through movies array and select a rental whose movie id matches a 
       # movie id in list of movies. id is important because there is a duplicate.
-      # rentals do not have movie id's... only movie titles as strings...
+      # rentals do not have movie id's, but need to be linked somehow
+      # need to remove a single duplicate movie from list of available movies
+
     end
 
     #function to rent a movie or raise an error that movie is not available/found for specific date range
     def rent_movie(movie_title, date_range, customer_name)
       #finds matches for a specific movie title
-      movie_request = movies.select do |movie|
-        movie.title == movie_title
-      end
 
       #eventually add successful rental to array of rentals
-      rentals << Rental.new(movie_title, date_range, customer_name)
     end
 
     private
@@ -36,7 +31,7 @@ module GreenBox
 
     def self.load_movies
       all_movies = CSV.read("data/movies.csv", headers: false).map do |line|
-        Movie.new id = line[0].to_i, 
+        GreenBox::Movie.new id = line[0].to_i, 
                   title = line[1], 
                   publisher = line[2], 
                   actors: line[3].split(":")
