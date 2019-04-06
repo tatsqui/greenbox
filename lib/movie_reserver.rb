@@ -12,8 +12,8 @@ module GreenBox
     end
 
     def available_movies(date_range)
-      movies_available = @rentals.select { |rental| !rental.date_range.overlaps(date_range) }
-      return @movies - movies_available
+      # movies_available = @rentals.select { |rental| rental.date_range.overlaps(date_range) }
+      # return @movies - movies_available
     end
 
     def rent_movie(movie_title, date_range, customer_name)
