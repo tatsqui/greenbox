@@ -1,7 +1,7 @@
 require 'time'
 require_relative 'spec_helper'
 
-xdescribe 'GreenBox::Rental' do
+describe 'GreenBox::Rental' do
   let (:date_range) do
     GreenBox::DateRange.new(Time.parse('2018-08-09'), Time.parse('2018-08-11'))
   end
@@ -23,7 +23,7 @@ xdescribe 'GreenBox::Rental' do
     end
   end
 
-  describe 'cost' do
+  xdescribe 'cost' do
     it 'calculates the cost for a rental' do
       rental = GreenBox::Rental.new(movie, date_range, 'Ada Lovelace')
 
