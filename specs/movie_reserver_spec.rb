@@ -59,7 +59,7 @@ describe 'GreenBox::MovieReserver' do
       expect(available_movies.length).must_equal 11
     end
 
-    xit 'will not include rented movies' do
+    it 'will not include rented movies' do
       date_range = GreenBox::DateRange.new(Time.parse('2018-08-08'), Time.parse('2018-08-09'))
       reserver.rent_movie('Crazy Rich Asians', date_range, 'Ada Lovelace')
 
