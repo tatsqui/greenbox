@@ -15,15 +15,15 @@ module GreenBox
       # movie id in list of movies. id is important because there is a duplicate.
       # rentals do not have movie id's, but need to be linked somehow
       # need to remove a single duplicate movie from list of available movies
-
+      
     end
 
     #function to rent a movie or raise an error that movie is not available/found for specific date range
     def rent_movie(movie_title, date_range, customer_name)
-      #finds matches for a specific movie title
+      #finds matching movie objects for a given title
+      movie_rented = movies.each { |movie| movie.title == movie_title }
 
-      #eventually add successful rental to array of rentals
-    end
+      # for each movie that is already rented, see if it is available for given date range
 
     private
 

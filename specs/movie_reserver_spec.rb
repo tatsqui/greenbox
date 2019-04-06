@@ -61,9 +61,9 @@ describe "GreenBox::MovieReserver" do
     it "will not include rented movies" do
       date_range = GreenBox::DateRange.new(Time.parse("2018-08-08"), Time.parse("2018-08-09"))
       reserver.rent_movie("Crazy Rich Asians", date_range, "Ada Lovelace")
-
+      
       available_movies = reserver.available_movies(date_range)
-    
+     
       expect(available_movies.length).must_equal 10
 
       movie_id = 2
@@ -76,13 +76,22 @@ describe "GreenBox::MovieReserver" do
   end
 
   xdescribe "rent_movie" do
+    let(:new_reserver) { GreenBox::MovieReserver.new}
+
     it "returns a rental for a successfully rented movie" do
-      # TODO Your Code goes here
+      date_range = GreenBox::DateRange.new(Time.parse("2018-08-08"), Time.parse("2018-08-09"))
+      rental = new_reserver.rent_movie("Crazy Rich Asians", date_range, "Ada Lovelace")
+
+      rental_search = new_reserver.rentals.find do |existing_rental|
+        existing_rental == rental
+      end
+
+      expect(rental_search).must_equal rental
 
     end
 
     it "can rent multiple movies with the same title" do
-      # TODO Your Code goes here
+      new_reserver.rent_movie()
 
     end
 
