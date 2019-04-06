@@ -17,14 +17,14 @@ describe 'GreenBox::MovieReserver' do
     end
   end
 
-  xdescribe 'load_movies' do
+  describe 'load_movies' do
     let (:movie_list) { GreenBox::MovieReserver.load_movies }
 
-    xit 'loads the right number of movies' do
+    it 'loads the right number of movies' do
       expect(movie_list.length).must_equal MOVIES_IN_CSV
     end
 
-    xit 'loads the 1st movie' do
+    it 'loads the 1st movie' do
       first_movie = movie_list.first
 
       expect(first_movie.title).must_equal 'Green Lantern'
@@ -32,7 +32,7 @@ describe 'GreenBox::MovieReserver' do
       expect(first_movie.publisher).must_equal 'Fox'
     end
 
-    xit 'loads the last movie' do
+    it 'loads the last movie' do
       last_movie = movie_list.last
 
       expect(last_movie.title).must_equal 'Crazy Rich Asians'
@@ -40,7 +40,7 @@ describe 'GreenBox::MovieReserver' do
       expect(last_movie.publisher).must_equal 'Warner Bros'
     end
 
-    xit 'loads the right actors' do
+    it 'loads the right actors' do
       first_movie = movie_list.first
 
       expect(first_movie.actors).must_include 'Blake Lively'
@@ -51,7 +51,7 @@ describe 'GreenBox::MovieReserver' do
     end
   end
 
-  describe 'movies available' do
+  xdescribe 'movies available' do
 
     xit 'will list the available movies' do
       available_movies = reserver.available_movies(date_range)
